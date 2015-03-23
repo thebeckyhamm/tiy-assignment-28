@@ -1,53 +1,120 @@
+(function(views) {
+
+var Input = React.createClass({displayName: "Input",
+    render: function() {
+        var htmlID = "textinput-" + name + Math.random();
+        var type = this.props.type || "text";
+        var label = this.props.label || this.props.name;
+        var placeholder = this.props.placeholder || "";
+        return (
+            React.createElement("div", {className: "field"}, 
+                React.createElement("label", {htmlFor: htmlID}, label), 
+                React.createElement("input", {
+                    type: type, 
+                    name: this.props.name, 
+                    htmlID: htmlID, 
+                    placeholder: placeholder}
+                )
+            )
+        );
+    }
+
+});
+
+var Select = React.createClass({displayName: "Select",
+
+    makeOption: function(option, index) {
+
+        return React.createElement("option", {key: index, value: option}, option);
+
+    },
+
+    render: function() {
+        var htmlID = "select-" + name + Math.random();
+        var label = this.props.label || this.props.name;
+
+
+        return (
+            React.createElement("div", {className: "field field-select"}, 
+                React.createElement("label", {htmlFor: htmlID}, label), 
+                React.createElement("select", {htmlID: htmlID, 
+                        defaultValue: this.props.defaultValue, 
+                        name: this.props.name}, 
+                    this.props.options.map(this.makeOption)
+                )
+                
+            )
+        );
+    }
+
+});
+
+views.Input = Input;
+views.Select = Select;
+
+
+})(fitness.views);
+
 (function(views){
 
-    var GoalInput = React.createClass({displayName: "GoalInput",
-        render: function() {
-            var htmlID = "textinput-" + name + Math.random();
-            var type = this.props.type || "text";
-            var label = this.props.label || this.props.name;
-            var placeholder = this.props.placeholder || "";
-            return (
-                React.createElement("div", {className: "field"}, 
-                    React.createElement("label", {for: htmlID}, label), 
-                    React.createElement("input", {
-                        type: type, 
-                        name: this.props.name, 
-                        htmlID: htmlID, 
-                        placeholder: placeholder}
-                    )
-                )
-            );
-        }
-
-    });
-
-    var GoalSelect = React.createClass({displayName: "GoalSelect",
-
-        makeOption: function(option, index) {
-
-            return React.createElement("option", {key: index, value: option}, option);
-
+    var Login = React.createClass({displayName: "Login",
+        onSubmit: function(e) {
+            e.preventDefault();
+            var data = $(e.target).serializeJSON();
+            fitness.login(data);
         },
 
         render: function() {
-            var htmlID = "select-" + name + Math.random();
-            var label = this.props.label || this.props.name;
-
 
             return (
-                React.createElement("div", {className: "field field-select"}, 
-                    React.createElement("label", null, label), 
-                    React.createElement("select", {htmlID: htmlID, 
-                            defaultValue: this.props.defaultValue, 
-                            name: this.props.name}, 
-                        this.props.options.map(this.makeOption)
-                    )
-                    
+                React.createElement("form", {className: "login-form", onSubmit: this.onSubmit}, 
+                    React.createElement(views.Input, {type: "text", label: "Email:", name: "email"}), 
+                    React.createElement(views.Input, {type: "password", label: "Password:", name: "password"}), 
+                    React.createElement("button", null, "Sign In")
+                )
+            )
+        }
+
+    });
+
+    var Logout = React.createClass({displayName: "Logout",
+        signOut: function(e) {
+            e.preventDefault();
+            fitness.logout();
+        },
+
+        render: function() {
+            return React.createElement("button", {onClick: this.signOut}, "Sign Out");
+        }
+
+    });
+
+    var InOut = React.createClass({displayName: "InOut",
+        getLogInOut: function() {
+            if (fitness.currentUser) {
+                return React.createElement(Logout, null);
+            }
+            else {
+                return React.createElement(Login, null);
+            }
+        },
+
+        render: function() {
+            return (
+                React.createElement("div", {className: "login-out"}, 
+                    this.getLogInOut()
                 )
             );
         }
 
     });
+
+
+views.InOut = InOut;
+
+})(fitness.views);
+(function(views){
+
 
 
     var GoalForm = React.createBackboneClass({
@@ -65,21 +132,21 @@
             return (
 
                 React.createElement("form", {onSubmit: this.onSubmit, className: "goal-form"}, 
-                    React.createElement(GoalInput, {
+                    React.createElement(Input, {
                         label: "Goal Name", 
                         type: "text", 
                         name: "goalName", 
                         placeholder: "ex: Run"}), 
-                    React.createElement(GoalInput, {
+                    React.createElement(Input, {
                         label: "Number", 
                         type: "number", 
                         name: "number", 
                         placeholder: "5"}), 
-                    React.createElement(GoalSelect, {label: "Unit", 
+                    React.createElement(Select, {label: "Unit", 
                                 options: this.units, 
                                 name: "unit", 
                                 defaultValue: "times"}), 
-                    React.createElement(GoalSelect, {label: "Time Interval", 
+                    React.createElement(Select, {label: "Time Interval", 
                                 options: this.time, 
                                 name: "amountOfTime", 
                                 defaultValue: "per week"}), 

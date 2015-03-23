@@ -35,11 +35,14 @@ var fitness = {
         if (authData) {
             fitness.currentUser = authData;
             console.log("A user is logged in:", authData);
+            fitness.trigger("sign:in");
         } 
         else {
             fitness.currentUser = null;
             console.log("No one is logged in");
+            fitness.trigger("sign:out");
         }
+        fitness.trigger("sign:in:out");
     },
 
     addGoal: function(goal) {

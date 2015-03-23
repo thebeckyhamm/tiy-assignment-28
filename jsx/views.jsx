@@ -1,53 +1,5 @@
 (function(views){
 
-    var GoalInput = React.createClass({
-        render: function() {
-            var htmlID = "textinput-" + name + Math.random();
-            var type = this.props.type || "text";
-            var label = this.props.label || this.props.name;
-            var placeholder = this.props.placeholder || "";
-            return (
-                <div className="field">
-                    <label for={htmlID}>{label}</label>
-                    <input 
-                        type={type} 
-                        name={this.props.name}
-                        htmlID={htmlID}
-                        placeholder={placeholder} 
-                    />
-                </div>
-            );
-        }
-
-    });
-
-    var GoalSelect = React.createClass({
-
-        makeOption: function(option, index) {
-
-            return <option key={index} value={option}>{option}</option>;
-
-        },
-
-        render: function() {
-            var htmlID = "select-" + name + Math.random();
-            var label = this.props.label || this.props.name;
-
-
-            return (
-                <div className="field field-select">
-                    <label>{label}</label>
-                    <select htmlID={htmlID}
-                            defaultValue={this.props.defaultValue}
-                            name={this.props.name}>
-                        {this.props.options.map(this.makeOption)}
-                    </select>
-                    
-                </div>
-            );
-        }
-
-    });
 
 
     var GoalForm = React.createBackboneClass({
@@ -65,21 +17,21 @@
             return (
 
                 <form onSubmit={this.onSubmit} className="goal-form">
-                    <GoalInput 
+                    <Input 
                         label="Goal Name" 
                         type="text" 
                         name="goalName"
                         placeholder="ex: Run" />
-                    <GoalInput 
+                    <Input 
                         label="Number" 
                         type="number" 
                         name="number"
                         placeholder="5" />
-                    <GoalSelect label="Unit" 
+                    <Select label="Unit" 
                                 options={this.units} 
                                 name="unit"
                                 defaultValue="times" />
-                    <GoalSelect label="Time Interval" 
+                    <Select label="Time Interval" 
                                 options={this.time}
                                 name="amountOfTime"
                                 defaultValue="per week" />
