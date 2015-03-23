@@ -64,13 +64,21 @@ views.Select = Select;
             fitness.login(data);
         },
 
+        onClick: function(e) {
+            e.preventDefault();
+            $(".login-form").show();
+        },
+
         render: function() {
 
             return (
-                React.createElement("form", {className: "login-form", onSubmit: this.onSubmit}, 
-                    React.createElement(views.Input, {type: "text", label: "Email:", name: "email"}), 
-                    React.createElement(views.Input, {type: "password", label: "Password:", name: "password"}), 
-                    React.createElement("button", null, "Sign In")
+                React.createElement("div", {className: "login"}, 
+                    React.createElement("button", {className: "button-header", onClick: this.onClick}, "Login ▼"), 
+                    React.createElement("form", {className: "login-form", onSubmit: this.onSubmit}, 
+                        React.createElement(views.Input, {type: "text", label: "Email:", name: "email"}), 
+                        React.createElement(views.Input, {type: "password", label: "Password:", name: "password"}), 
+                        React.createElement("button", null, "Sign In")
+                    )
                 )
             )
         }
@@ -84,7 +92,7 @@ views.Select = Select;
         },
 
         render: function() {
-            return React.createElement("button", {onClick: this.signOut}, "Sign Out");
+            return React.createElement("button", {className: "button-header", onClick: this.signOut}, "Sign Out");
         }
 
     });
@@ -132,21 +140,21 @@ views.InOut = InOut;
             return (
 
                 React.createElement("form", {onSubmit: this.onSubmit, className: "goal-form"}, 
-                    React.createElement(Input, {
+                    React.createElement(views.Input, {
                         label: "Goal Name", 
                         type: "text", 
                         name: "goalName", 
                         placeholder: "ex: Run"}), 
-                    React.createElement(Input, {
+                    React.createElement(views.Input, {
                         label: "Number", 
                         type: "number", 
                         name: "number", 
                         placeholder: "5"}), 
-                    React.createElement(Select, {label: "Unit", 
+                    React.createElement(views.Select, {label: "Unit", 
                                 options: this.units, 
                                 name: "unit", 
                                 defaultValue: "times"}), 
-                    React.createElement(Select, {label: "Time Interval", 
+                    React.createElement(views.Select, {label: "Time Interval", 
                                 options: this.time, 
                                 name: "amountOfTime", 
                                 defaultValue: "per week"}), 

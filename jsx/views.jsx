@@ -17,21 +17,21 @@
             return (
 
                 <form onSubmit={this.onSubmit} className="goal-form">
-                    <Input 
+                    <views.Input 
                         label="Goal Name" 
                         type="text" 
                         name="goalName"
                         placeholder="ex: Run" />
-                    <Input 
+                    <views.Input 
                         label="Number" 
                         type="number" 
                         name="number"
                         placeholder="5" />
-                    <Select label="Unit" 
+                    <views.Select label="Unit" 
                                 options={this.units} 
                                 name="unit"
                                 defaultValue="times" />
-                    <Select label="Time Interval" 
+                    <views.Select label="Time Interval" 
                                 options={this.time}
                                 name="amountOfTime"
                                 defaultValue="per week" />

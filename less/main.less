@@ -13,6 +13,7 @@ body {
     background-color: white; 
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
+    margin: 0;
 }
 
 button {
@@ -24,10 +25,74 @@ button {
     font-size: 1rem;
     font-weight: 600;
     padding: .5rem;
+    &:hover {
+        background: darken(@teal, 5%);
+    }
 }
 
 .text-right {
     text-align: right;
+}
+
+
+.header {
+    background-color: @blue;
+    color: @lime;
+    margin-bottom: 1rem;
+    padding: .5rem;
+    position: relative;
+    &:after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    .logo {
+        float: left;
+        font-size: 1.5rem;
+    }
+    .sign-in-out {
+        float: right;
+    }
+    .button-header {
+        background-color: lighten(@blue, 5%);
+        &:hover {
+            background-color: darken(@blue, 5%);
+        }
+    }
+    .login-form {
+        background-color: @blue;
+        display: none;
+        padding: .5rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        .field {
+            margin-bottom: .5em;
+        }
+        label {
+            display: block;
+        }
+        input {
+            background-color: fade(white, 10%);
+            border: none;
+            border-bottom: 2px solid @teal;
+            color: white;
+            display: inline-block;
+            font-size: 1rem;
+            height: 2rem;
+            padding: .5em;
+            width: 200px;
+            &:focus {
+                background-color: lighten(@blue, 30%);
+                outline: 2px solid @teal;
+            }
+
+        }
+        button {
+            float: none;
+            display: block;
+        }
+    }
 }
 
 .main {

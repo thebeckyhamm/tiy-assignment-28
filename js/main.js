@@ -5,7 +5,7 @@ $(function() {
     fitness.on("sign:in:out", function() {
         React.render(
             React.createElement(fitness.views.InOut),
-            document.querySelector(".login")
+            document.querySelector(".sign-in-out")
         );
         
     });
@@ -25,37 +25,34 @@ $(function() {
     });
 
 
+    fitness.on("new:goal", function() {
+        console.log("help");
+        React.render(
+            React.createElement(fitness.views.GoalForm),
+            main
+        );
+    });
 
 
-
-    if (fitness.currentUser) {
+    fitness.on("add:goal", function(goal) {
         var user = new fitness.models.User();
+        user.add(goal);
         React.render(
             React.createElement(fitness.views.GoalList, {collection: user}),
             main
         );
+    });
 
 
-        fitness.on("add:goal", function(goal) {
-            user.add(goal);
-            React.render(
-                React.createElement(fitness.views.GoalList, {collection: user}),
-                main
-            );
-        });
-
-        fitness.on("new:goal", function() {
-            React.render(
-                React.createElement(fitness.views.GoalForm),
-                main
-            );
-        });
-
-    }
 
 
     fitness.fire = new Firebase(fitness.firebaseURL);
 
     fitness.fire.onAuth(fitness.onAuthCallback);
+    
+    if (fitness.currentUser) {
+        var user = new fitness.models.User();
+
+    }
 
 });

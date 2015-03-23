@@ -7,14 +7,22 @@
             fitness.login(data);
         },
 
+        onClick: function(e) {
+            e.preventDefault();
+            $(".login-form").show();
+        },
+
         render: function() {
 
             return (
-                <form className="login-form" onSubmit={this.onSubmit}>
-                    <views.Input type="text" label="Email:" name="email"/>
-                    <views.Input type="password" label="Password:" name="password"/>
-                    <button>Sign In</button>
-                </form>
+                <div className="login">
+                    <button className="button-header" onClick={this.onClick}>Login &#x25BC;</button>
+                    <form className="login-form" onSubmit={this.onSubmit}>
+                        <views.Input type="text" label="Email:" name="email"/>
+                        <views.Input type="password" label="Password:" name="password"/>
+                        <button>Sign In</button>
+                    </form>
+                </div>
             )
         }
 
@@ -27,7 +35,7 @@
         },
 
         render: function() {
-            return <button onClick={this.signOut}>Sign Out</button>;
+            return <button className="button-header" onClick={this.signOut}>Sign Out</button>;
         }
 
     });
