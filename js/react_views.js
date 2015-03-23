@@ -56,7 +56,7 @@
     });
 
 
-    var AddGoal = React.createBackboneClass({
+    var GoalForm = React.createBackboneClass({
 
         units: ["miles", "minutes", "reps", "lbs", "times", "days"],
         time: ["per day", "per week", "per month", "in total"],
@@ -97,7 +97,42 @@
 
     });
 
-views.AddGoal = AddGoal;
+
+    var GoalList = React.createBackboneClass({
+
+        makeGoal: function(model, index) {
+            return (
+                React.createElement("div", {className: "goal", key: index}, 
+                    React.createElement("span", null, index + 1, ": "), 
+                    React.createElement("span", null, model.get("goalName"), " "), 
+                    React.createElement("span", null, model.get("number"), " "), 
+                    React.createElement("span", null, model.get("unit"), " "), 
+                    React.createElement("span", null, model.get("amountOfTime"))
+                )
+            );
+
+
+        },
+
+        render: function() {
+            return (
+                React.createElement("div", {className: "goal-view"}, 
+                    React.createElement("div", {className: "goal-list"}, this.props.collection.map(this.makeGoal)), 
+                    React.createElement("button", {onClick: this.onAdd}, "Add New Goal")
+                )
+
+            );
+        },
+
+        onAdd: function(e) {
+            e.preventDefault();
+            fitness.trigger("new:goal");
+        }
+
+    });
+
+views.GoalForm = GoalForm;
+views.GoalList = GoalList;
 
 
 })(fitness.views);
