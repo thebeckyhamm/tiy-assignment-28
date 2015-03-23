@@ -8,13 +8,12 @@
             var placeholder = this.props.placeholder || "";
             return (
                 React.createElement("div", {className: "field"}, 
-                    React.createElement("label", null, " ", label, 
-                        React.createElement("input", {
-                            type: type, 
-                            name: this.props.name, 
-                            htmlID: htmlID, 
-                            placeholder: placeholder}
-                        )
+                    React.createElement("label", {for: htmlID}, label), 
+                    React.createElement("input", {
+                        type: type, 
+                        name: this.props.name, 
+                        htmlID: htmlID, 
+                        placeholder: placeholder}
                     )
                 )
             );
@@ -25,14 +24,9 @@
     var GoalSelect = React.createClass({displayName: "GoalSelect",
 
         makeOption: function(option, index) {
-            // var defaultOption = this.props.defaultOption;
 
-            // if (defaultOption = option) {
-            //     return <option key={index} selected="selected">{option}</option>;
-            // } 
-            // else {
-                return React.createElement("option", {key: index, value: option}, option);
-            // }
+            return React.createElement("option", {key: index, value: option}, option);
+
         },
 
         render: function() {
@@ -41,14 +35,14 @@
 
 
             return (
-                React.createElement("div", {className: "field"}, 
-                    React.createElement("label", null, label, 
-                        React.createElement("select", {htmlID: htmlID, 
-                                defaultValue: this.props.defaultValue, 
-                                name: this.props.name}, 
-                            this.props.options.map(this.makeOption)
-                        )
+                React.createElement("div", {className: "field field-select"}, 
+                    React.createElement("label", null, label), 
+                    React.createElement("select", {htmlID: htmlID, 
+                            defaultValue: this.props.defaultValue, 
+                            name: this.props.name}, 
+                        this.props.options.map(this.makeOption)
                     )
+                    
                 )
             );
         }
@@ -70,7 +64,7 @@
         render: function() {
             return (
 
-                React.createElement("form", {onSubmit: this.onSubmit}, 
+                React.createElement("form", {onSubmit: this.onSubmit, className: "goal-form"}, 
                     React.createElement(GoalInput, {
                         label: "Goal Name", 
                         type: "text", 
@@ -85,11 +79,12 @@
                                 options: this.units, 
                                 name: "unit", 
                                 defaultValue: "times"}), 
-                    React.createElement(GoalSelect, {label: "Amount of Time:", 
+                    React.createElement(GoalSelect, {label: "Time Interval", 
                                 options: this.time, 
                                 name: "amountOfTime", 
                                 defaultValue: "per week"}), 
-                    React.createElement("button", null, "Add Goal")
+                    React.createElement("div", {className: "text-right"}, React.createElement("button", null, "Add Goal"))
+                    
                 )
 
             );
@@ -103,10 +98,10 @@
         makeGoal: function(model, index) {
             return (
                 React.createElement("div", {className: "goal", key: index}, 
-                    React.createElement("span", null, index + 1, ": "), 
-                    React.createElement("span", null, model.get("goalName"), " "), 
-                    React.createElement("span", null, model.get("number"), " "), 
-                    React.createElement("span", null, model.get("unit"), " "), 
+                    React.createElement("span", null, index + 1, " "), 
+                    React.createElement("span", {className: "goal-name"}, model.get("goalName"), " "), 
+                    React.createElement("span", null, model.get("number"), "  "), 
+                    React.createElement("span", null, model.get("unit"), "  "), 
                     React.createElement("span", null, model.get("amountOfTime"))
                 )
             );
@@ -117,8 +112,11 @@
         render: function() {
             return (
                 React.createElement("div", {className: "goal-view"}, 
-                    React.createElement("div", {className: "goal-list"}, this.props.collection.map(this.makeGoal)), 
-                    React.createElement("button", {onClick: this.onAdd}, "Add New Goal")
+                    React.createElement("header", {className: "goal-header"}, 
+                        React.createElement("h4", null, "Goals"), 
+                        React.createElement("button", {onClick: this.onAdd}, "+ New")
+                    ), 
+                    React.createElement("div", {className: "goal-list"}, this.props.collection.map(this.makeGoal))
                 )
 
             );

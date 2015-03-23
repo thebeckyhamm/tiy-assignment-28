@@ -8,14 +8,13 @@
             var placeholder = this.props.placeholder || "";
             return (
                 <div className="field">
-                    <label> {label}
-                        <input 
-                            type={type} 
-                            name={this.props.name}
-                            htmlID={htmlID}
-                            placeholder={placeholder} 
-                        />
-                    </label>
+                    <label for={htmlID}>{label}</label>
+                    <input 
+                        type={type} 
+                        name={this.props.name}
+                        htmlID={htmlID}
+                        placeholder={placeholder} 
+                    />
                 </div>
             );
         }
@@ -25,14 +24,9 @@
     var GoalSelect = React.createClass({
 
         makeOption: function(option, index) {
-            // var defaultOption = this.props.defaultOption;
 
-            // if (defaultOption = option) {
-            //     return <option key={index} selected="selected">{option}</option>;
-            // } 
-            // else {
-                return <option key={index} value={option}>{option}</option>;
-            // }
+            return <option key={index} value={option}>{option}</option>;
+
         },
 
         render: function() {
@@ -41,14 +35,14 @@
 
 
             return (
-                <div className="field">
-                    <label>{label}
-                        <select htmlID={htmlID}
-                                defaultValue={this.props.defaultValue}
-                                name={this.props.name}>
-                            {this.props.options.map(this.makeOption)}
-                        </select>
-                    </label>
+                <div className="field field-select">
+                    <label>{label}</label>
+                    <select htmlID={htmlID}
+                            defaultValue={this.props.defaultValue}
+                            name={this.props.name}>
+                        {this.props.options.map(this.makeOption)}
+                    </select>
+                    
                 </div>
             );
         }
@@ -70,7 +64,7 @@
         render: function() {
             return (
 
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit} className="goal-form">
                     <GoalInput 
                         label="Goal Name" 
                         type="text" 
@@ -85,11 +79,12 @@
                                 options={this.units} 
                                 name="unit"
                                 defaultValue="times" />
-                    <GoalSelect label="Amount of Time:" 
+                    <GoalSelect label="Time Interval" 
                                 options={this.time}
                                 name="amountOfTime"
                                 defaultValue="per week" />
-                    <button>Add Goal</button>
+                    <div className="text-right"><button>Add Goal</button></div>
+                    
                 </form>
 
             );
@@ -103,10 +98,10 @@
         makeGoal: function(model, index) {
             return (
                 <div className="goal" key={index}>
-                    <span>{index + 1}: </span>
-                    <span>{model.get("goalName")} </span>
-                    <span>{model.get("number")} </span>
-                    <span>{model.get("unit")} </span>
+                    <span>{index + 1} </span>
+                    <span className="goal-name">{model.get("goalName")}&nbsp;</span>
+                    <span>{model.get("number")} &nbsp;</span>
+                    <span>{model.get("unit")} &nbsp;</span>
                     <span>{model.get("amountOfTime")}</span>
                 </div>
             );
@@ -117,8 +112,11 @@
         render: function() {
             return (
                 <div className="goal-view">
+                    <header className="goal-header">
+                        <h4>Goals</h4>
+                        <button onClick={this.onAdd}>+ New</button>
+                    </header>
                     <div className="goal-list">{this.props.collection.map(this.makeGoal)}</div>
-                    <button onClick={this.onAdd}>Add New Goal</button>
                 </div>
 
             );

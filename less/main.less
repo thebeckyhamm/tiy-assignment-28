@@ -1,4 +1,132 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+@dark-blue: #091C58;
+@blue: #085E9F;
+@teal: #1CD9A4;
+@green: #B9F467;
+@lime: #E3F983;
+
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: pink; 
-    
+    background-color: white; 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+
+button {
+    background: @teal;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .5rem;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.main {
+    background-color: @blue;
+    margin: 0 auto;
+    max-width: 500px;
+    .goal-header {
+        background-color: @dark-blue;
+        color: @teal;
+        padding: 1rem;  
+        h4 {
+            float: left;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        &:after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        button {
+            float: right;
+        }
+    }
+    .goal-list {
+        padding: 1rem;
+        .goal {
+            background-color: white;
+            box-shadow: 1px 1px 1px 1px fade(black, 10%);
+            margin-bottom: .5rem;
+            span {
+                display: inline-block;
+            }
+            > span:first-child {
+                background-color: @lime;
+                min-width: 1rem;
+                padding: 1rem;
+                text-align: center;
+            }
+            .goal-name {
+                padding-left: 1rem;
+            }
+        }
+    }
+    .goal-form {
+        padding: 1rem;
+        .field {
+            align-items: center;
+            display: flex;
+            margin-bottom: .5em;
+            min-height: 35px;
+            position: relative;
+            &:after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+            label {
+                color: white;
+                display: inline-block;
+                padding-right: .5em;
+                text-align: right;
+                width: 25%;
+            }
+            input, select {
+                background-color: fade(white, 10%);
+                border: none;
+                border-bottom: 2px solid @teal;
+                color: white;
+                display: inline-block;
+                float: right;
+                font-size: 1rem;
+                height: 2.5rem;
+                padding: .5em;
+                width: 75%;
+                &:focus {
+                    background-color: lighten(@blue, 30%);
+                    outline: 2px solid @teal;
+                }
+            }
+            ::-webkit-input-placeholder {
+               color: @lime;
+            }
+            select {
+                color: @lime;
+                -webkit-appearance: none;
+                border-radius: 0;
+                position: relative;
+            }
+            
+        }
+        .field-select:before {
+            content: "\25BE";
+            color: @lime;
+            position: absolute;
+            right: .5em;
+            top: .5em;
+
+        }
+
+    }
 }

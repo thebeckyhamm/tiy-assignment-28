@@ -1,3 +1,123 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
 body {
-  background-color: pink;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+button {
+  background: #1cd9a4;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: .5rem;
+}
+.text-right {
+  text-align: right;
+}
+.main {
+  background-color: #085e9f;
+  margin: 0 auto;
+  max-width: 500px;
+}
+.main .goal-header {
+  background-color: #091c58;
+  color: #1cd9a4;
+  padding: 1rem;
+}
+.main .goal-header h4 {
+  float: left;
+  font-size: 1.5rem;
+  margin: 0;
+}
+.main .goal-header:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.main .goal-header button {
+  float: right;
+}
+.main .goal-list {
+  padding: 1rem;
+}
+.main .goal-list .goal {
+  background-color: white;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  margin-bottom: .5rem;
+}
+.main .goal-list .goal span {
+  display: inline-block;
+}
+.main .goal-list .goal > span:first-child {
+  background-color: #e3f983;
+  min-width: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+.main .goal-list .goal .goal-name {
+  padding-left: 1rem;
+}
+.main .goal-form {
+  padding: 1rem;
+}
+.main .goal-form .field {
+  align-items: center;
+  display: flex;
+  margin-bottom: .5em;
+  min-height: 35px;
+  position: relative;
+}
+.main .goal-form .field:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.main .goal-form .field label {
+  color: white;
+  display: inline-block;
+  padding-right: .5em;
+  text-align: right;
+  width: 25%;
+}
+.main .goal-form .field input,
+.main .goal-form .field select {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-bottom: 2px solid #1cd9a4;
+  color: white;
+  display: inline-block;
+  float: right;
+  font-size: 1rem;
+  height: 2.5rem;
+  padding: .5em;
+  width: 75%;
+}
+.main .goal-form .field input:focus,
+.main .goal-form .field select:focus {
+  background-color: #4aacf6;
+  outline: 2px solid #1cd9a4;
+}
+.main .goal-form .field ::-webkit-input-placeholder {
+  color: #e3f983;
+}
+.main .goal-form .field select {
+  color: #e3f983;
+  -webkit-appearance: none;
+  border-radius: 0;
+  position: relative;
+}
+.main .goal-form .field-select:before {
+  content: "\25BE";
+  color: #e3f983;
+  position: absolute;
+  right: .5em;
+  top: .5em;
 }
