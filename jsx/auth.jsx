@@ -18,8 +18,16 @@
                 <div className="login">
                     <button className="button-header" onClick={this.onClick}>Login &#x25BC;</button>
                     <form className="login-form" onSubmit={this.onSubmit}>
-                        <views.Input type="text" label="Email:" name="email"/>
-                        <views.Input type="password" label="Password:" name="password"/>
+                        <views.Input 
+                            type="text" 
+                            label="Email:" 
+                            name="email"
+                            required="required" />
+                        <views.Input 
+                            type="password" 
+                            label="Password:" 
+                            name="password"
+                            required="required"/>
                         <button>Sign In</button>
                     </form>
                 </div>

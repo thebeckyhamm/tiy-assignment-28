@@ -6,6 +6,8 @@ var Input = React.createClass({
         var type = this.props.type || "text";
         var label = this.props.label || this.props.name;
         var placeholder = this.props.placeholder || "";
+        var value = this.props.value || "";
+        var required = this.props.required || "";
         return (
             <div className="field">
                 <label htmlFor={htmlID}>{label}</label>
@@ -14,6 +16,8 @@ var Input = React.createClass({
                     name={this.props.name}
                     htmlID={htmlID}
                     placeholder={placeholder} 
+                    defaultValue={value}
+                    required={required}
                 />
             </div>
         );

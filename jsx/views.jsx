@@ -9,8 +9,14 @@
 
         onSubmit: function(e) {
             e.preventDefault();
-            var goal = $(e.target).serializeJSON();
-            fitness.trigger("add:goal", goal);
+            var goalItems = $(e.target).serializeJSON();
+            var states = _.map(goalItems, function(item) {
+                return !!item;
+            });
+            var containsFalse = _.contains(states, false);
+            if (!containsFalse) {
+                fitness.trigger("add:goal", goalItems);   
+            }
         },
 
         render: function() {
@@ -21,12 +27,14 @@
                         label="Goal Name" 
                         type="text" 
                         name="goalName"
-                        placeholder="ex: Run" />
+                        placeholder="ex: Run"
+                        required="required" />
                     <views.Input 
                         label="Number" 
                         type="number" 
                         name="number"
-                        placeholder="5" />
+                        placeholder="5"
+                        required="required" />  
                     <views.Select label="Unit" 
                                 options={this.units} 
                                 name="unit"

@@ -28,7 +28,7 @@ button:hover {
 }
 .header {
   background-color: #085e9f;
-  color: #e3f983;
+  color: #1cd9a4;
   margin-bottom: 1rem;
   padding: .5rem;
   position: relative;
@@ -120,7 +120,7 @@ button:hover {
 }
 .main .goal-list .goal > span:first-child {
   background-color: #e3f983;
-  min-width: 1rem;
+  min-width: 50px;
   padding: 1rem;
   text-align: center;
 }
@@ -168,10 +168,10 @@ button:hover {
   outline: 2px solid #1cd9a4;
 }
 .main .goal-form .field ::-webkit-input-placeholder {
-  color: #e3f983;
+  color: rgba(255, 255, 255, 0.3);
 }
 .main .goal-form .field select {
-  color: #e3f983;
+  color: white;
   -webkit-appearance: none;
   border-radius: 0;
   position: relative;

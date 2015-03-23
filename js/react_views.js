@@ -6,6 +6,8 @@ var Input = React.createClass({displayName: "Input",
         var type = this.props.type || "text";
         var label = this.props.label || this.props.name;
         var placeholder = this.props.placeholder || "";
+        var value = this.props.value || "";
+        var required = this.props.required || "";
         return (
             React.createElement("div", {className: "field"}, 
                 React.createElement("label", {htmlFor: htmlID}, label), 
@@ -13,7 +15,9 @@ var Input = React.createClass({displayName: "Input",
                     type: type, 
                     name: this.props.name, 
                     htmlID: htmlID, 
-                    placeholder: placeholder}
+                    placeholder: placeholder, 
+                    defaultValue: value, 
+                    required: required}
                 )
             )
         );
@@ -75,8 +79,16 @@ views.Select = Select;
                 React.createElement("div", {className: "login"}, 
                     React.createElement("button", {className: "button-header", onClick: this.onClick}, "Login ▼"), 
                     React.createElement("form", {className: "login-form", onSubmit: this.onSubmit}, 
-                        React.createElement(views.Input, {type: "text", label: "Email:", name: "email"}), 
-                        React.createElement(views.Input, {type: "password", label: "Password:", name: "password"}), 
+                        React.createElement(views.Input, {
+                            type: "text", 
+                            label: "Email:", 
+                            name: "email", 
+                            required: "required"}), 
+                        React.createElement(views.Input, {
+                            type: "password", 
+                            label: "Password:", 
+                            name: "password", 
+                            required: "required"}), 
                         React.createElement("button", null, "Sign In")
                     )
                 )
@@ -132,8 +144,14 @@ views.InOut = InOut;
 
         onSubmit: function(e) {
             e.preventDefault();
-            var goal = $(e.target).serializeJSON();
-            fitness.trigger("add:goal", goal);
+            var goalItems = $(e.target).serializeJSON();
+            var states = _.map(goalItems, function(item) {
+                return !!item;
+            });
+            var containsFalse = _.contains(states, false);
+            if (!containsFalse) {
+                fitness.trigger("add:goal", goalItems);   
+            }
         },
 
         render: function() {
@@ -144,12 +162,14 @@ views.InOut = InOut;
                         label: "Goal Name", 
                         type: "text", 
                         name: "goalName", 
-                        placeholder: "ex: Run"}), 
+                        placeholder: "ex: Run", 
+                        required: "required"}), 
                     React.createElement(views.Input, {
                         label: "Number", 
                         type: "number", 
                         name: "number", 
-                        placeholder: "5"}), 
+                        placeholder: "5", 
+                        required: "required"}), 
                     React.createElement(views.Select, {label: "Unit", 
                                 options: this.units, 
                                 name: "unit", 

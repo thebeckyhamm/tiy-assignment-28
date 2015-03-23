@@ -26,7 +26,6 @@ $(function() {
 
 
     fitness.on("new:goal", function() {
-        console.log("help");
         React.render(
             React.createElement(fitness.views.GoalForm),
             main
@@ -49,7 +48,7 @@ $(function() {
     fitness.fire = new Firebase(fitness.firebaseURL);
 
     fitness.fire.onAuth(fitness.onAuthCallback);
-    
+
     if (fitness.currentUser) {
         var user = new fitness.models.User();
 
