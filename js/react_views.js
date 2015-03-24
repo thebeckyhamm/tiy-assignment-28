@@ -53,8 +53,21 @@ var Select = React.createClass({displayName: "Select",
 
 });
 
+var CheckOff = React.createClass({displayName: "CheckOff",
+
+    render: function() {
+    var status = this.props.on ? "✓" : "▢";
+
+        return (
+            React.createElement("span", {className: "check-off", onClick: this.props.onCheck}, status)
+        );
+    }
+
+});
+
 views.Input = Input;
 views.Select = Select;
+views.CheckOff = CheckOff;
 
 
 })(fitness.views);
@@ -189,15 +202,21 @@ views.InOut = InOut;
 
 
     var GoalList = React.createBackboneClass({
+        checking: function(model) {
+            model.onCheck();
+            fitness.trigger("check:goal");
+        },
 
         makeGoal: function(model, index) {
+            var checked = model.get("completed_at");
             return (
                 React.createElement("div", {className: "goal", key: index}, 
                     React.createElement("span", null, index + 1, " "), 
                     React.createElement("span", {className: "goal-name"}, model.get("goalName"), " "), 
                     React.createElement("span", null, model.get("number"), "  "), 
                     React.createElement("span", null, model.get("unit"), "  "), 
-                    React.createElement("span", null, model.get("amountOfTime"))
+                    React.createElement("span", null, model.get("amountOfTime")), 
+                    React.createElement(views.CheckOff, {on: checked, onCheck: this.checking.bind(this, model)})
                 )
             );
 

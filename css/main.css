@@ -127,6 +127,11 @@ button:hover {
 .main .goal-list .goal .goal-name {
   padding-left: 1rem;
 }
+.main .goal-list .goal .check-off {
+  background-color: #085e9f;
+  color: white;
+  padding: .5em;
+}
 .main .goal-form {
   padding: 1rem;
 }

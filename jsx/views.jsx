@@ -54,8 +54,13 @@
 
 
     var GoalList = React.createBackboneClass({
+        checking: function(model) {
+            model.onCheck();
+            fitness.trigger("check:goal");
+        },
 
         makeGoal: function(model, index) {
+            var checked = model.get("completed_at");
             return (
                 <div className="goal" key={index}>
                     <span>{index + 1} </span>
@@ -63,6 +68,7 @@
                     <span>{model.get("number")} &nbsp;</span>
                     <span>{model.get("unit")} &nbsp;</span>
                     <span>{model.get("amountOfTime")}</span>
+                    <views.CheckOff on={checked} onCheck={this.checking.bind(this, model)}/> 
                 </div>
             );
 

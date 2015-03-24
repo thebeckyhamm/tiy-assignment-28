@@ -1,5 +1,16 @@
 (function(models){
 
+    var Goal = Backbone.Model.extend({
+        onCheck: function() {
+            if(!!this.get("completed_at")) {
+                this.set("completed_at", null)
+            }
+            else {
+                this.set("completed_at", new Date().toString());
+            }
+        }
+    })
+
     var User = Backbone.Firebase.Collection.extend({
         url: function() {
             if (!fitness.currentUser) {
@@ -10,7 +21,8 @@
                 return fitness.firebaseURL + uid + "/goals/";
             }
 
-        }
+        },
+        model: Goal
 
     });
 

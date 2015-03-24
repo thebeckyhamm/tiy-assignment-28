@@ -53,8 +53,21 @@ var Select = React.createClass({
 
 });
 
+var CheckOff = React.createClass({
+
+    render: function() {
+    var status = this.props.on ? "✓" : "▢";
+
+        return (
+            <span className="check-off" onClick={this.props.onCheck}>{status}</span>
+        );
+    }
+
+});
+
 views.Input = Input;
 views.Select = Select;
+views.CheckOff = CheckOff;
 
 
 })(fitness.views);

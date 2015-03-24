@@ -58,6 +58,12 @@
                 this.navigate("goals");
 
             });
+
+            this.listenTo(fitness, "check:goal", function(goal) {
+                var user = new fitness.models.User();
+                this.showGoals(user);
+
+            });
             
             fitness.fire = new Firebase(fitness.firebaseURL);
 
