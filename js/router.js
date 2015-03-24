@@ -3,10 +3,10 @@
 
 
         routes: {
-            "" : "showGoals",
+            "" : "showHome",
             "goals" : "showGoals",
-            "create-new-goal" : "createNewGoal"
-
+            "create-new-goal" : "createNewGoal",
+            "register" : "showRegister"
         },
 
         initialize: function() {
@@ -41,7 +41,17 @@
 
             });
 
+            this.listenTo(fitness, "start:register", function() {
+                console.log("register triggered");
+                this.showRegister();
+                this.navigate("register");
 
+            });
+            this.listenTo(fitness, "has:registered", function() {
+                console.log("has registered");
+                this.showGoals();
+                this.navigate("goals");
+            });
             this.listenTo(fitness, "new:goal", function() {
                 React.render(
                     React.createElement(fitness.views.GoalForm),
@@ -77,14 +87,33 @@
         },
 
         showGoals: function() {
+            // I have to do this multiple times.  Is there a better way to 
+            // set this up?
             var main = document.querySelector(".main");
 
             if (fitness.currentUser) {
                 var user = new fitness.models.User();
-
+                React.render(
+                    React.createElement(fitness.views.GoalList, {collection: user}),
+                    main
+                );   
             }
+        },
+
+        showHome: function() {
+            var main = document.querySelector(".main");
+
+            while (main.firstChild) {
+                main.removeChild(main.firstChild);
+            }
+            
+        },
+
+        showRegister: function() {
+            var main = document.querySelector(".main");
+
             React.render(
-                React.createElement(fitness.views.GoalList, {collection: user}),
+                React.createElement(fitness.views.Register),
                 main
             );                
             

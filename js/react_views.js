@@ -86,6 +86,11 @@ views.CheckOff = CheckOff;
             $(".login-form").show();
         },
 
+        register: function(e) {
+            e.preventDefault();
+            fitness.trigger("start:register");
+        },
+
         render: function() {
 
             return (
@@ -102,7 +107,38 @@ views.CheckOff = CheckOff;
                             label: "Password:", 
                             name: "password", 
                             required: "required"}), 
+                            React.createElement("a", {href: "", onClick: this.register}, "Need to Register?"), 
                         React.createElement("button", null, "Sign In")
+                    )
+                )
+            )
+        }
+
+    });
+
+    var Register = React.createClass({displayName: "Register",
+        onSubmit: function(e) {
+            e.preventDefault();
+            var data = $(e.target).serializeJSON();
+            fitness.register(data);
+        },
+
+        render: function() {
+
+            return (
+                React.createElement("div", {className: "register"}, 
+                    React.createElement("form", {className: "register-form", onSubmit: this.onSubmit}, 
+                        React.createElement(views.Input, {
+                            type: "text", 
+                            label: "Email:", 
+                            name: "email", 
+                            required: "required"}), 
+                        React.createElement(views.Input, {
+                            type: "password", 
+                            label: "Password:", 
+                            name: "password", 
+                            required: "required"}), 
+                        React.createElement("button", null, "Register")
                     )
                 )
             )
@@ -144,6 +180,7 @@ views.CheckOff = CheckOff;
 
 
 views.InOut = InOut;
+views.Register = Register;
 
 })(fitness.views);
 (function(views){
