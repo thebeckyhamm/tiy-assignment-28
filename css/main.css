@@ -128,9 +128,9 @@ button:hover {
   padding-left: 1rem;
 }
 .main .goal-list .goal .check-off {
-  background-color: #085e9f;
-  color: white;
-  padding: .5em;
+  color: #085e9f;
+  float: right;
+  padding: 1em;
 }
 .main .goal-form {
   padding: 1rem;
