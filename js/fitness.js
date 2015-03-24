@@ -15,7 +15,6 @@ var fitness = {
             else {
               console.log("Successfully created user account with uid:", fireData.uid);
               fitness.login(userData);
-              fitness.trigger("has:registered");
             }
         });
     },

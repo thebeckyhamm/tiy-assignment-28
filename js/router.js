@@ -47,11 +47,6 @@
                 this.navigate("register");
 
             });
-            this.listenTo(fitness, "has:registered", function() {
-                console.log("has registered");
-                this.showGoals();
-                this.navigate("goals");
-            });
             this.listenTo(fitness, "new:goal", function() {
                 React.render(
                     React.createElement(fitness.views.GoalForm),
