@@ -34,7 +34,7 @@ var fitness = {
     onAuthCallback: function(authData) {
         if (authData) {
             fitness.currentUser = authData;
-            console.log("A user is logged in:", authData);
+            console.log("A user is logged in");
             fitness.trigger("sign:in");
         } 
         else {
@@ -56,7 +56,5 @@ var fitness = {
     },
 
 };
-
-
 
 _.extend(fitness, Backbone.Events);
