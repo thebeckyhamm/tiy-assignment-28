@@ -3,7 +3,7 @@
 
 
         routes: {
-            "" : "",
+            "" : "showGoals",
             "goals" : "showGoals",
             "create-new-goal" : "createNewGoal"
 
@@ -27,7 +27,7 @@
 
                 var user = new fitness.models.User();
                 console.log(user);
-                this.showGoals(user);
+                this.showGoals();              
                 this.navigate("goals");
             });
 
@@ -54,14 +54,15 @@
             this.listenTo(fitness, "add:goal", function(goal) {
                 var user = new fitness.models.User();
                 user.add(goal);
-                this.showGoals(user);
+                this.showGoals();           
                 this.navigate("goals");
 
             });
 
             this.listenTo(fitness, "check:goal", function(goal) {
                 var user = new fitness.models.User();
-                this.showGoals(user);
+                this.showGoals();
+                this.navigate("goals");
 
             });
             
@@ -75,15 +76,18 @@
             }
         },
 
-        showGoals: function(user) {
-            console.log(user);
+        showGoals: function() {
             var main = document.querySelector(".main");
 
+            if (fitness.currentUser) {
+                var user = new fitness.models.User();
+
+            }
             React.render(
                 React.createElement(fitness.views.GoalList, {collection: user}),
                 main
-            );
-
+            );                
+            
         }
     });
 
