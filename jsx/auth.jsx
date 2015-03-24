@@ -14,6 +14,7 @@
 
         register: function(e) {
             e.preventDefault();
+            $(".login-form").hide();
             fitness.trigger("start:register");
         },
 
@@ -64,7 +65,9 @@
                             label="Password:" 
                             name="password"
                             required="required"/>
-                        <button>Register</button>
+                        <div className="text-right">
+                            <button>Register</button>
+                        </div>
                     </form>
                 </div>
             )

@@ -88,6 +88,7 @@ views.CheckOff = CheckOff;
 
         register: function(e) {
             e.preventDefault();
+            $(".login-form").hide();
             fitness.trigger("start:register");
         },
 
@@ -138,7 +139,9 @@ views.CheckOff = CheckOff;
                             label: "Password:", 
                             name: "password", 
                             required: "required"}), 
-                        React.createElement("button", null, "Register")
+                        React.createElement("div", {className: "text-right"}, 
+                            React.createElement("button", null, "Register")
+                        )
                     )
                 )
             )

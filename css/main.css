@@ -80,6 +80,12 @@ button:hover {
   background-color: #4aacf6;
   outline: 2px solid #1cd9a4;
 }
+.header .login-form a {
+  color: #e3f983;
+  display: block;
+  font-size: 90%;
+  margin-bottom: .5rem;
+}
 .header .login-form button {
   float: none;
   display: block;
@@ -132,22 +138,26 @@ button:hover {
   float: right;
   padding: 1em;
 }
-.main .goal-form {
+.main .goal-form,
+.main .register-form {
   padding: 1rem;
 }
-.main .goal-form .field {
+.main .goal-form .field,
+.main .register-form .field {
   align-items: center;
   display: flex;
   margin-bottom: .5em;
   min-height: 35px;
   position: relative;
 }
-.main .goal-form .field:after {
+.main .goal-form .field:after,
+.main .register-form .field:after {
   content: "";
   clear: both;
   display: table;
 }
-.main .goal-form .field label {
+.main .goal-form .field label,
+.main .register-form .field label {
   color: white;
   display: inline-block;
   padding-right: .5em;
@@ -155,7 +165,9 @@ button:hover {
   width: 25%;
 }
 .main .goal-form .field input,
-.main .goal-form .field select {
+.main .register-form .field input,
+.main .goal-form .field select,
+.main .register-form .field select {
   background-color: rgba(255, 255, 255, 0.1);
   border: none;
   border-bottom: 2px solid #1cd9a4;
@@ -168,20 +180,25 @@ button:hover {
   width: 75%;
 }
 .main .goal-form .field input:focus,
-.main .goal-form .field select:focus {
+.main .register-form .field input:focus,
+.main .goal-form .field select:focus,
+.main .register-form .field select:focus {
   background-color: #4aacf6;
   outline: 2px solid #1cd9a4;
 }
-.main .goal-form .field ::-webkit-input-placeholder {
+.main .goal-form .field ::-webkit-input-placeholder,
+.main .register-form .field ::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
-.main .goal-form .field select {
+.main .goal-form .field select,
+.main .register-form .field select {
   color: white;
   -webkit-appearance: none;
   border-radius: 0;
   position: relative;
 }
-.main .goal-form .field-select:before {
+.main .goal-form .field-select:before,
+.main .register-form .field-select:before {
   content: "\25BE";
   color: #e3f983;
   position: absolute;
